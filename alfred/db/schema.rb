@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108053308) do
+ActiveRecord::Schema.define(version: 20141108054105) do
+
+  create_table "controls", force: true do |t|
+    t.datetime "returned_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "equipment", force: true do |t|
     t.string   "device_name"
