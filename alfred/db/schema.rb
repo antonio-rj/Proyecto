@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108054105) do
+ActiveRecord::Schema.define(version: 20141108065943) do
 
   create_table "controls", force: true do |t|
     t.datetime "returned_at"
@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(version: 20141108054105) do
     t.integer  "id_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "office_id"
   end
+
+  add_index "users", ["office_id"], name: "index_users_on_office_id"
 
 end
