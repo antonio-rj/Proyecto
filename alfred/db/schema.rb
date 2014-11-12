@@ -11,13 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108065943) do
+ActiveRecord::Schema.define(version: 20141108072232) do
 
   create_table "controls", force: true do |t|
     t.datetime "returned_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "equipment_id"
+    t.integer  "user_id"
   end
+
+  add_index "controls", ["equipment_id"], name: "index_controls_on_equipment_id"
+  add_index "controls", ["user_id"], name: "index_controls_on_user_id"
 
   create_table "equipment", force: true do |t|
     t.string   "device_name"
