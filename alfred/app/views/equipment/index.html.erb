@@ -1,0 +1,29 @@
+<h1>Listing equipment</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Device name</th>
+      <th>Code name</th>
+      <th>Available</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @equipment.each do |equipment| %>
+      <tr>
+        <td><%= equipment.device_name %></td>
+        <td><%= equipment.code_name %></td>
+        <td><%= equipment.available %></td>
+        <td><%= link_to 'Show', equipment %></td>
+        <td><%= link_to 'Edit', edit_equipment_path(equipment) %></td>
+        <td><%= link_to 'Destroy', equipment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Equipment', new_equipment_path %>
