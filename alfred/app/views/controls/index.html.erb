@@ -1,20 +1,28 @@
-<h1>Listing controls</h1>
+<h1>Control de equipos</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Returned at</th>
-      <th colspan="3"></th>
+      <th>#</th>
+      <th>Usuario</th>
+      <th>Equipo</th>
+      <th>Préstamo</th>
+      <th>Devolucion</th>
+      <th colspan="7"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @controls.each do |control| %>
       <tr>
+        <td><%= control.id %></td>
         <td><%= control.returned_at %></td>
-        <td><%= link_to 'Show', control %></td>
-        <td><%= link_to 'Edit', edit_control_path(control) %></td>
-        <td><%= link_to 'Destroy', control, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=  %></td>
+        <td><%= control.created_at %></td>
+        <td><%= control.returned_at %></td>
+        <td><%= link_to 'Mostrar', control %></td>
+        <td><%= link_to 'Editar', edit_control_path(control) %></td>
+        <td><%= link_to 'Borrar', control, method: :delete, data: { confirm: 'Está seguro de borrar esta entrada?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Control', new_control_path %>
+<%= link_to 'Añadir entrada', new_control_path %>

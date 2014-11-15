@@ -1,9 +1,19 @@
+<h1>Control de equipos</h1>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Returned at:</strong>
-  <%= @control.returned_at %>
-</p>
 
-<%= link_to 'Edit', edit_control_path(@control) %> |
-<%= link_to 'Back', controls_path %>
+<div>  
+     <strong>Equipo:</strong>
+     <%= @equipment.device_name %><br><br>
+     <strong>Usuario:</strong>
+     <%= "#{@user.first_name.titleize} #{@user.last_name.titleize}" %><br><br>
+     <strong>Préstamo:</strong>
+     <%= @control.created_at %> <br><br>
+     <strong>Devolución:</strong>
+     <%= @control.returned_at %> <br><br>
+  </p>
+</div>
+
+<%= link_to 'Editar', edit_control_path(@control) %> |
+<%= link_to 'Volver', controls_path %>

@@ -1,19 +1,21 @@
+<h1>Equipo #<%="#{@equipment.id}"%></h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Device name:</strong>
+  <strong>Equipo:</strong>
   <%= @equipment.device_name %>
 </p>
 
 <p>
-  <strong>Code name:</strong>
+  <strong>Código:</strong>
   <%= @equipment.code_name %>
 </p>
 
 <p>
-  <strong>Available:</strong>
+  <strong>Disponible:</strong>
   <%= @equipment.available %>
 </p>
 
-<%= link_to 'Edit', edit_equipment_path(@equipment) %> |
-<%= link_to 'Back', equipment_index_path %>
+<%= link_to 'Editar', edit_equipment_path(@equipment) %> |
+<%= link_to 'Volver', equipment_index_path %>

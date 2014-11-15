@@ -1,22 +1,24 @@
-<h1>Listing offices</h1>
+<h1>Lista de oficinas</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Office number</th>
-      <th>Department</th>
-      <th colspan="3"></th>
+      <th>#</th>
+      <th>Número de oficina</th>
+      <th>Edificio</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @offices.each do |office| %>
       <tr>
+        <td><%= office.id %></td>
         <td><%= office.office_number %></td>
         <td><%= office.department %></td>
-        <td><%= link_to 'Show', office %></td>
-        <td><%= link_to 'Edit', edit_office_path(office) %></td>
-        <td><%= link_to 'Destroy', office, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mostrar', office %></td>
+        <td><%= link_to 'Editar', edit_office_path(office) %></td>
+        <td><%= link_to 'Borrar', office, method: :delete, data: { confirm: 'Está seguro de borrar esta oficina?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Office', new_office_path %>
+<%= link_to 'Nueva oficina', new_office_path %>

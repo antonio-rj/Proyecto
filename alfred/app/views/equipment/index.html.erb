@@ -1,11 +1,11 @@
-<h1>Listing equipment</h1>
+<h1>Lista de equipos</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Device name</th>
-      <th>Code name</th>
-      <th>Available</th>
+      <th>Dispositivo</th>
+      <th>Código</th>
+      <th>Disponible</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,9 +16,9 @@
         <td><%= equipment.device_name %></td>
         <td><%= equipment.code_name %></td>
         <td><%= equipment.available %></td>
-        <td><%= link_to 'Show', equipment %></td>
-        <td><%= link_to 'Edit', edit_equipment_path(equipment) %></td>
-        <td><%= link_to 'Destroy', equipment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mostrar', equipment %></td>
+        <td><%= link_to 'Editar', edit_equipment_path(equipment) %></td>
+        <td><%= link_to 'Borrar', equipment, method: :delete, data: { confirm: 'Está seguro de borrar este equipo?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Equipment', new_equipment_path %>
+<%= link_to 'Añadir equipo', new_equipment_path %>

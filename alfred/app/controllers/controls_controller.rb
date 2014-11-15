@@ -10,6 +10,9 @@ class ControlsController < ApplicationController
   # GET /controls/1
   # GET /controls/1.json
   def show
+    @user = User.find(@control.user_id)
+    @equipment = Equipment.find(@control.equipment_id)
+
   end
 
   # GET /controls/new
@@ -24,7 +27,10 @@ class ControlsController < ApplicationController
   # POST /controls
   # POST /controls.json
   def create
-    @control = Control.new(control_params)
+    @user = User.find_by(id_number: params['id_number'])
+    @equipment = Equipment.find_by(code_name: params['code_name'])
+    render "show", user: @user, equipment: @equipment 
+    @control = Control.new(user_id: user.id, equipment_id: equipment.id)
 
     respond_to do |format|
       if @control.save
@@ -69,6 +75,6 @@ class ControlsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def control_params
-      params.require(:control).permit(:returned_at)
+      params.fetch(:control, {}).permit(:returned_at, :id_number, :code_name)
     end
 end
