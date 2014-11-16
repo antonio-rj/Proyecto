@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
-  resources :controls
+	resources :controls do
+		collection do
+    		get 'returns'
+  		end
+  	end
 
-  resources :offices
+	resources :offices
 
-  resources :equipment
+	resources :equipment
 
-  resources :users
+	resources :users
 
-  
-  root                  'static_pages#home'
-  get   'contact'    => 'static_pages#contact'
+
+	root                  'static_pages#home'
+	get   'contact'    => 'static_pages#contact'
 
 end

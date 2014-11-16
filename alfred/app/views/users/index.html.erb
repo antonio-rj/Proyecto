@@ -3,28 +3,26 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Nombre</th>
-      <th>Apellidos</th>
-      <th>Teléfono</th>
-      <th>Cédula</th>
-      <th>Oficina</th>
-      <th colspan="5"></th>
+      <th class="text-center">Nombre</th>
+      <th class="text-center">Apellidos</th>
+      <th class="text-center">Teléfono</th>
+      <th class="text-center">Cédula</th>
+      <th class="text-center">Oficina</th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.id %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.phone %></td>
-        <td><%= user.id_number %></td>
-        <td><%=  %></td>
-        <td><%= link_to 'Mostrar', user %></td>
-        <td><%= link_to 'Editar', edit_user_path(user) %></td>
-        <td><%= link_to 'Borrar', user, method: :delete, data: { confirm: 'Está seguro de borrar este usuario?' } %></td>
+        <td align="center"><%= user.first_name %></td>
+        <td align="center"><%= user.last_name %></td>
+        <td align="center"><%= user.phone %></td>
+        <td align="center"><%= user.id_number %></td>
+        <td align="center"><%=  %></td>
+        <td align="center"><%= link_to 'Mostrar', user %></td>
+        <td align="center"><%= link_to 'Editar', edit_user_path(user) %></td>
+        <td align="center"><%= link_to 'Borrar', user, method: :delete, data: { confirm: 'Está seguro de borrar este usuario?' } %></td>
       </tr>
     <% end %>
   </tbody>

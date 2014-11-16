@@ -28,9 +28,15 @@
     <%= f.number_field :id_number %>
   </div>
   <div class="field">
-    <%= 'Oficina' %><br>
-    <%=  %>
+    <%= label :department, 'Edificio' %><br>
+    <%= text_field_tag 'code_name', '' %>
   </div>
+
+  <div class="field">
+    <%= label :office_number, 'Oficina' %><br>
+    <%= text_field_tag 'code_name', '' %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Crear/actualizar usuario" %>
   </div>

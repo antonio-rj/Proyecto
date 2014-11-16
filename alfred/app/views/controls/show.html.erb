@@ -7,9 +7,9 @@
      <strong>Equipo:</strong>
      <%= @equipment.device_name %><br><br>
      <strong>Usuario:</strong>
-     <%= "#{@user.first_name.titleize} #{@user.last_name.titleize}" %><br><br>
+     <%= "#{@user.name}" %><br><br>
      <strong>Préstamo:</strong>
-     <%= @control.created_at %> <br><br>
+     <%= formatted_date(@control.created_at) %> <br><br>
      <strong>Devolución:</strong>
      <%= @control.returned_at %> <br><br>
   </p>

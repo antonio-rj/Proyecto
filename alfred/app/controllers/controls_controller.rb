@@ -7,6 +7,10 @@ class ControlsController < ApplicationController
     @controls = Control.all
   end
 
+  def returns
+
+  end
+
   # GET /controls/1
   # GET /controls/1.json
   def show
@@ -29,17 +33,15 @@ class ControlsController < ApplicationController
   def create
     @user = User.find_by(id_number: params['id_number'])
     @equipment = Equipment.find_by(code_name: params['code_name'])
-    render "show", user: @user, equipment: @equipment 
-    @control = Control.new(user_id: user.id, equipment_id: equipment.id)
-
-    respond_to do |format|
-      if @control.save
-        format.html { redirect_to @control, notice: 'Control was successfully created.' }
-        format.json { render :show, status: :created, location: @control }
-      else
-        format.html { render :new }
-        format.json { render json: @control.errors, status: :unprocessable_entity }
-      end
+    @control = Control.new    
+    
+    if !@user.nil? && !@equipment.nil? && @equipment.available?
+      @equipment.available = false
+      @equipment.save
+      @control = Control.new(user_id: @user.id, equipment_id: @equipment.id)
+      redirect_to @control if @control.save
+    else
+      render :new
     end
   end
 

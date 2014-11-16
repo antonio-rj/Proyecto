@@ -3,22 +3,20 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Número de oficina</th>
-      <th>Edificio</th>
-      <th colspan="4"></th>
+      <th class="text-center">Número de oficina</th>
+      <th class="text-center">Edificio</th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @offices.each do |office| %>
       <tr>
-        <td><%= office.id %></td>
-        <td><%= office.office_number %></td>
-        <td><%= office.department %></td>
-        <td><%= link_to 'Mostrar', office %></td>
-        <td><%= link_to 'Editar', edit_office_path(office) %></td>
-        <td><%= link_to 'Borrar', office, method: :delete, data: { confirm: 'Está seguro de borrar esta oficina?' } %></td>
+        <td align="center"><%= office.office_number %></td>
+        <td align="center"><%= office.department %></td>
+        <td align="center"><%= link_to 'Mostrar', office %></td>
+        <td align="center"><%= link_to 'Editar', edit_office_path(office) %></td>
+        <td align="center"><%= link_to 'Borrar', office, method: :delete, data: { confirm: 'Está seguro de borrar esta oficina?' } %></td>
       </tr>
     <% end %>
   </tbody>
