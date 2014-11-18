@@ -16,7 +16,6 @@ class ControlsController < ApplicationController
   def show
     @user = User.find(@control.user_id)
     @equipment = Equipment.find(@control.equipment_id)
-
   end
 
   # GET /controls/new

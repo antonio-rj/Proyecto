@@ -6,7 +6,7 @@
       <th class="text-center">Dispositivo</th>
       <th class="text-center">Código</th>
       <th class="text-center">Disponible</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -18,7 +18,6 @@
         <td align="center"><%= equip_status(equip.available) %></td>
         <td align="center"><%= link_to 'Mostrar', equip %></td>
         <td align="center"><%= link_to 'Editar', edit_equipment_path(equip) %></td>
-        <td align="center"><%= link_to 'Borrar', equip, method: :delete, data: { confirm: 'Está seguro de borrar este equipo?' } %></td>
       </tr>
     <% end %>
   </tbody>

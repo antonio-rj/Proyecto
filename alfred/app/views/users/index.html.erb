@@ -19,7 +19,7 @@
         <td align="center"><%= user.last_name %></td>
         <td align="center"><%= user.phone %></td>
         <td align="center"><%= user.id_number %></td>
-        <td align="center"><%=  %></td>
+        <td align="center"><%= user.office_id %></td>
         <td align="center"><%= link_to 'Mostrar', user %></td>
         <td align="center"><%= link_to 'Editar', edit_user_path(user) %></td>
         <td align="center"><%= link_to 'Borrar', user, method: :delete, data: { confirm: 'Está seguro de borrar este usuario?' } %></td>
