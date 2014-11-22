@@ -6,7 +6,7 @@
       <th class="text-center">Dispositivo</th>
       <th class="text-center">Código</th>
       <th class="text-center">Disponible</th>
-      <th colspan="2"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -16,7 +16,6 @@
         <td align="center"><%= equip.device_name %></td>
         <td align="center"><%= equip.code_name %></td>
         <td align="center"><%= equip_status(equip.available) %></td>
-        <td align="center"><%= link_to 'Mostrar', equip %></td>
         <td align="center"><%= link_to 'Editar', edit_equipment_path(equip) %></td>
       </tr>
     <% end %>

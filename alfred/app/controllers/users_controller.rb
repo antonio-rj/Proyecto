@@ -5,12 +5,12 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    @office = Office.find(@user.office_id)
   end
 
   # GET /users/new
@@ -25,14 +25,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @office = Office.find_by(office_number: params['office_number'], department: params['department'])
-    @user = User.new
 
-    if !@office.nil?
-      @view_office = @office.id
-    else
-      @view_office = "N/A"
-    end
+    @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
@@ -77,6 +71,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.fetch(:user, {}).permit(:first_name, :last_name, :phone, :id_number, :office_number, :department)
+      params.require(:user).permit(:first_name, :last_name, :phone, :id_number, :office_id)
     end
 end

@@ -7,8 +7,8 @@
       <th class="text-center">Equipo</th>
       <th class="text-center">Código</th>
       <th class="text-center">Préstamo</th>
-      <th class="text-center">Devolucion</th>
-      <th colspan="2"></th> 
+      <th class="text-center">Devolución</th>
+      <th colspan="1"></th> 
     </tr>
   </thead>
 
@@ -20,8 +20,7 @@
         <td align="center"><%= "#{Equipment.find(control.equipment_id).code_name}" %></td>
         <td align="center"><%= formatted_date(control.created_at) %></td>
         <td align="center"><%= control.returned_at %></td>
-        <td align="center"><%= link_to 'Mostrar', control %></td>
-        <td align="center"><%= link_to 'Borrar', control, method: :delete, data: { confirm: 'Está seguro de borrar esta entrada?' } %></td>
+        <td align="center"><%= link_to 'Borrar', control, method: :delete, data: { confirm: 'Está seguro de borrar este préstamo?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +28,4 @@
 
 <br>
 
-<%= link_to 'Añadir entrada', new_control_path %>
+<%= link_to 'Solicitar préstamo', new_control_path %>

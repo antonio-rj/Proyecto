@@ -1,4 +1,4 @@
-<h1>Usuario #<%="#{@user.id}"%> </h1>
+<h1>Usuario</h1>
 
 <p id="notice"><%= notice %></p>
 
@@ -24,6 +24,7 @@
 
 <p>
   <strong>Oficina:</strong>
+  <%= office_is_present?(@user.office_id) %>
 </p>
 
 <%= link_to 'Editar', edit_user_path(@user) %> |

@@ -27,14 +27,10 @@
     <%= f.label :id_number, 'Cédula' %><br>
     <%= f.number_field :id_number %>
   </div>
-  <div class="field">
-    <%= label :department, 'Edificio' %><br>
-    <%= text_field_tag 'department', '' %>
-  </div>
 
   <div class="field">
-    <%= label :office_number, 'Oficina' %><br>
-    <%= number_field_tag 'office_number', '' %>
+    <%= label :office_id, 'Oficina' %><br>
+    <%= collection_select :user, :office_id, Office.all, :id, :combined_office, {:prompt => "Elija una oficina"} %>
   </div>
 
   <div class="actions">
