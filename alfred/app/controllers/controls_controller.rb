@@ -8,7 +8,30 @@ class ControlsController < ApplicationController
   end
 
   def returns
+  end
 
+  def set_returns
+    equipment = Equipment.find_by(
+                  code_name: control_params['code_name'],
+                  available: false
+                )
+
+    if equipment
+      control = Control.find_by(equipment_id: equipment.id)
+
+      if control
+        equipment.available = true
+        control.returned_at = Time.now
+
+        if equipment.save! && control.save!
+          render 'index'
+        else
+          render 'returns'
+        end
+      end
+    else
+      render 'returns'
+    end
   end
 
   # GET /controls/1

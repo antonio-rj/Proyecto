@@ -32,6 +32,7 @@
     <%= label :office_id, 'Oficina' %><br>
     <%= collection_select :user, :office_id, Office.all, :id, :combined_office, {:prompt => "Elija una oficina"} %>
   </div>
+<br>
 
   <div class="actions">
     <%= f.submit "Crear/actualizar usuario" %>

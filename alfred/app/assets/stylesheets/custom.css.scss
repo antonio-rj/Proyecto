@@ -4,6 +4,8 @@
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea; 
+$brand-success: #5cb85c;
+$brand-primary: #428bca;
 
 .green{
   color: green;
@@ -61,12 +63,21 @@ h2 {
 }
 
 h3 {
-  font-size: 1.2em;
+  font-size: 2em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: left;
   font-weight: normal;
-  color: $gray-light;
+  color: $brand-primary;
+}
+
+h4 {
+  font-size: 2em;
+  letter-spacing: -1.5px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $brand-primary;
 }
 
 p {

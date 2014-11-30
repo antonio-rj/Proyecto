@@ -4,4 +4,7 @@ class Control < ActiveRecord::Base
 	validates :user_id, presence: true
 	validates :equipment_id, presence: true
 
+	scope :borrowed, -> { where(returned_at: nil) }
+	scope :returned, -> { where('returned_at IS NOT NULL') }
+
 end

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 	resources :controls do
 		collection do
     		get 'returns'
+  			post 'set_returns'
   		end
   	end
 

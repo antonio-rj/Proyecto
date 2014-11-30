@@ -1,5 +1,8 @@
 <h1>Control de equipos</h1>
 
+<%= link_to 'Solicitar préstamo', new_control_path %>
+
+<h4>En préstamo</h4>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -13,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @controls.each do |control| %>
+    <% @controls.borrowed.each do |control| %>
       <tr>
         <td align="center"><%= "#{User.find(control.user_id).name}" %></td>
         <td align="center"><%= "#{Equipment.find(control.equipment_id).device_name}" %></td>
@@ -25,7 +28,34 @@
     <% end %>
   </tbody>
 </table>
+<br><br><br>
+
+<h4>Devueltos</h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="text-center">Usuario</th>
+      <th class="text-center">Equipo</th>
+      <th class="text-center">Código</th>
+      <th class="text-center">Préstamo</th>
+      <th class="text-center">Devolución</th>
+      <th colspan="1"></th> 
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @controls.returned.each do |control| %>
+      <tr>
+        <td align="center"><%= "#{User.find(control.user_id).name}" %></td>
+        <td align="center"><%= "#{Equipment.find(control.equipment_id).device_name}" %></td>
+        <td align="center"><%= "#{Equipment.find(control.equipment_id).code_name}" %></td>
+        <td align="center"><%= formatted_date(control.created_at) %></td>
+        <td align="center"><%= formatted_date(control.returned_at) %></td>
+        <td align="center"><%= link_to 'Borrar', control, method: :delete, data: { confirm: 'Está seguro de borrar este préstamo?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <br>
-
-<%= link_to 'Solicitar préstamo', new_control_path %>

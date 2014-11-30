@@ -1,5 +1,10 @@
 <h1>Devoluciones</h1>
 
+<div class="field">
+<%= label :code_name, 'Codigo del equipo' %><br>
+<%= text_field_tag 'code_name', '' %>
+</div>  
+<br>  
 
-
+<%= button_to "Submit", {action: 'set_returns'}, :class => "button" %>
 
