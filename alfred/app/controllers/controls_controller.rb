@@ -5,27 +5,27 @@ class ControlsController < ApplicationController
   # GET /controls.json
   def index
     @controls_borrowed = Control.borrowed
-    @controls_returned = Control.returned.paginate(:page => params[:page])
+    @controls_returned = Control.returned.order(returned_at: :desc).paginate(:page => params[:page])
   end
 
   def returns
   end
 
-  def set_returns
+  def get_control
     equipment = Equipment.find_by(
-                  code_name: control_params['code_name'],
+                  code_name: params['code_name'],
                   available: false
                 )
 
     if equipment
-      control = Control.find_by(equipment_id: equipment.id)
+      control = Control.find_by(equipment_id: equipment.id, returned_at: nil)
 
       if control
         equipment.available = true
         control.returned_at = Time.now
 
         if equipment.save! && control.save!
-          render 'index'
+          redirect_to action: 'index'
         else
           render 'returns'
         end

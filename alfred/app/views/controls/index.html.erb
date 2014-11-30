@@ -3,61 +3,73 @@
 <%= link_to 'Solicitar préstamo', new_control_path %>
 
 <h4>En préstamo</h4>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th class="text-center">Usuario</th>
-      <th class="text-center">Equipo</th>
-      <th class="text-center">Código</th>
-      <th class="text-center">Préstamo</th>
-      <th class="text-center">Devolución</th>
-      <th colspan="1"></th> 
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @controls_borrowed.each do |control| %>
+<%- if @controls_borrowed.nil? %>
+  <div>No hay que mostrar</div>
+<%- else %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td align="center"><%= "#{User.find(control.user_id).name}" %></td>
-        <td align="center"><%= "#{Equipment.find(control.equipment_id).device_name}" %></td>
-        <td align="center"><%= "#{Equipment.find(control.equipment_id).code_name}" %></td>
-        <td align="center"><%= formatted_date(control.created_at) %></td>
-        <td align="center"><%= control.returned_at %></td>
-        <td align="center"><%= link_to 'Borrar', control, method: :delete, data: { confirm: 'Está seguro de borrar este préstamo?' } %></td>
+        <th class="text-center">Usuario</th>
+        <th class="text-center">Equipo</th>
+        <th class="text-center">Código</th>
+        <th class="text-center">Préstamo</th>
+        <th class="text-center">Devolución</th>
+        <th colspan="1"></th> 
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @controls_borrowed.each do |control| %>
+        <tr>
+          <td align="center"><%= "#{User.find(control.user_id).name}" %></td>
+          <td align="center"><%= "#{Equipment.find(control.equipment_id).device_name}" %></td>
+          <td align="center"><%= "#{Equipment.find(control.equipment_id).code_name}" %></td>
+          <td align="center"><%= formatted_date(control.created_at) %></td>
+          <td align="center"><%= control.returned_at %></td>
+          <td align="center"><%= link_to 'Borrar', control, method: :delete, data: { confirm: 'Está seguro de borrar este préstamo?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%- end %>
+
 <br><br><br>
 
 <h4>Devueltos</h4>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th class="text-center">Usuario</th>
-      <th class="text-center">Equipo</th>
-      <th class="text-center">Código</th>
-      <th class="text-center">Préstamo</th>
-      <th class="text-center">Devolución</th>
-      <th colspan="1"></th> 
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @controls_returned.each do |control| %>
+<%- if @controls_returned.nil? %>
+  <div>No hay que mostrar</div>
+<%- else %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td align="center"><%= "#{User.find(control.user_id).name}" %></td>
-        <td align="center"><%= "#{Equipment.find(control.equipment_id).device_name}" %></td>
-        <td align="center"><%= "#{Equipment.find(control.equipment_id).code_name}" %></td>
-        <td align="center"><%= formatted_date(control.created_at) %></td>
-        <td align="center"><%= formatted_date(control.returned_at) %></td>
-        <td align="center"><%= link_to 'Borrar', control, method: :delete, data: { confirm: 'Está seguro de borrar este préstamo?' } %></td>
+        <th class="text-center">Usuario</th>
+        <th class="text-center">Equipo</th>
+        <th class="text-center">Código</th>
+        <th class="text-center">Préstamo</th>
+        <th class="text-center">Devolución</th>
+        <th colspan="1"></th> 
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<% will_paginate @controls_returned %>
+    </thead>
+
+    <tbody>
+      <% @controls_returned.each do |control| %>
+        <tr>
+          <td align="center"><%= "#{User.find(control.user_id).name}" %></td>
+          <td align="center"><%= "#{Equipment.find(control.equipment_id).device_name}" %></td>
+          <td align="center"><%= "#{Equipment.find(control.equipment_id).code_name}" %></td>
+          <td align="center"><%= formatted_date(control.created_at) %></td>
+          <td align="center"><%= formatted_date(control.returned_at) %></td>
+          <td align="center"><%= link_to 'Borrar', control, method: :delete, data: { confirm: 'Está seguro de borrar este préstamo?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% will_paginate @controls_returned %>
+<%- end %>
+
+
 
 
 <br>

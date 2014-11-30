@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 	resources :controls do
 		collection do
     		get 'returns'
-  			post 'set_returns'
+  			get 'get_control'
   		end
   	end
 
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 	resources :users
 
 
-	root                  'static_pages#home'
+	root  'static_pages#home'
 	get   'contact'    => 'static_pages#contact'
 
 end
