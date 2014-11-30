@@ -4,7 +4,8 @@ class ControlsController < ApplicationController
   # GET /controls
   # GET /controls.json
   def index
-    @controls = Control.all
+    @controls_borrowed = Control.borrowed
+    @controls_returned = Control.returned.paginate(:page => params[:page])
   end
 
   def returns

@@ -16,7 +16,7 @@
   </thead>
 
   <tbody>
-    <% @controls.borrowed.each do |control| %>
+    <% @controls_borrowed.each do |control| %>
       <tr>
         <td align="center"><%= "#{User.find(control.user_id).name}" %></td>
         <td align="center"><%= "#{Equipment.find(control.equipment_id).device_name}" %></td>
@@ -45,7 +45,7 @@
   </thead>
 
   <tbody>
-    <% @controls.returned.each do |control| %>
+    <% @controls_returned.each do |control| %>
       <tr>
         <td align="center"><%= "#{User.find(control.user_id).name}" %></td>
         <td align="center"><%= "#{Equipment.find(control.equipment_id).device_name}" %></td>
@@ -57,5 +57,7 @@
     <% end %>
   </tbody>
 </table>
+<% will_paginate @controls_returned %>
+
 
 <br>
