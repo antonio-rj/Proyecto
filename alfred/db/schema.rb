@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108072232) do
+ActiveRecord::Schema.define(version: 20141201045245) do
 
   create_table "controls", force: true do |t|
     t.datetime "returned_at"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20141108072232) do
 
   create_table "equipment", force: true do |t|
     t.string   "device_name"
-    t.integer  "code_name"
+    t.string   "code_name"
     t.boolean  "available"
     t.datetime "created_at"
     t.datetime "updated_at"

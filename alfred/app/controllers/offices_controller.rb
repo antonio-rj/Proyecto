@@ -4,7 +4,7 @@ class OfficesController < ApplicationController
   # GET /offices
   # GET /offices.json
   def index
-    @offices = Office.order(department: :desc).paginate(:page => params[:page])
+    @offices = Office.order(department: :desc, office_number: :asc).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /offices/1

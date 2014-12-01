@@ -12,14 +12,15 @@
   <% end %>
     <div class="field">
     <%= label :id_number, 'Cedula' %><br>
-    <%= text_field_tag 'id_number', '', maxlength: 9 %>
+    <%= text_field_tag 'id_number', '', maxlength: 10%>
   </div>
   <div class="field">
     <%= label :code_name, 'Codigo del equipo' %><br>
     <%= text_field_tag 'code_name', '', maxlength: 10%>
   </div>
-
+  <br>
   <div class="actions">
     <%= f.submit "Crear/actualizar entrada", id: 'submit_button' %>
   </div>
+  <br>
 <% end %>

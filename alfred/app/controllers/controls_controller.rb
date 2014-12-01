@@ -5,7 +5,7 @@ class ControlsController < ApplicationController
   # GET /controls.json
   def index
     @controls_borrowed = Control.borrowed
-    @controls_returned = Control.returned.order(returned_at: :desc).paginate(:page => params[:page])
+    @controls_returned = Control.returned.order(returned_at: :desc).paginate(:page => params[:page],:per_page => 10)
   end
 
   def returns
@@ -85,6 +85,9 @@ class ControlsController < ApplicationController
   # DELETE /controls/1
   # DELETE /controls/1.json
   def destroy
+    @equipment = Equipment.find(@control.equipment_id)
+    @equipment.available = true
+    @equipment.save    
     @control.destroy
     respond_to do |format|
       format.html { redirect_to controls_url, notice: 'Control was successfully destroyed.' }

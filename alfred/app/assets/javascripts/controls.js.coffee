@@ -3,13 +3,13 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-$('document').ready -> 
+$('document').ready ->
   $("#id_number").keyup ->
     $("#code_name").focus() if parseInt(@value.length) == parseInt($(this).attr("maxlength"))
 
   $("#code_name").keyup ->
     if parseInt(@value.length) == parseInt($(this).attr("maxlength"))
-      $("#submit").submit()
+      $("#submit_button").submit()
 
   # newCreate = () ->
   #   idNumber = parseInt($('#id_number').val())
