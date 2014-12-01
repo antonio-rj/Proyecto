@@ -5,7 +5,7 @@
 <h4>En préstamo</h4>
 
 <%- if @controls_borrowed.nil? %>
-  <div>No hay que mostrar</div>
+  <div>No hay préstamos para mostrar</div>
 <%- else %>
   <table class="table table-striped">
     <thead>
@@ -39,7 +39,7 @@
 <h4>Devueltos</h4>
 
 <%- if @controls_returned.nil? %>
-  <div>No hay que mostrar</div>
+  <div>No hay devoluciones para mostrar</div>
 <%- else %>
   <table class="table table-striped">
     <thead>

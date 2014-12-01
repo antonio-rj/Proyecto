@@ -5,12 +5,11 @@
 
 $('document').ready -> 
   $("#id_number").keyup ->
-    $("#code_name").focus() if @value.length == parseInt($(this).attr("maxlength"))
+    $("#code_name").focus() if parseInt(@value.length) == parseInt($(this).attr("maxlength"))
 
   $("#code_name").keyup ->
-    if @value.length == parseInt($(this).attr("maxlength"))
-      $('#submit_button').submit()
-
+    if parseInt(@value.length) == parseInt($(this).attr("maxlength"))
+      $("#submit").submit()
 
   # newCreate = () ->
   #   idNumber = parseInt($('#id_number').val())
