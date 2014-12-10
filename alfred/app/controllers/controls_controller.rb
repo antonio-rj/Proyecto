@@ -58,18 +58,24 @@ class ControlsController < ApplicationController
     @equipment = Equipment.find_by(code_name: params['code_name'])
     @control = Control.new    
     
-    if !@user.nil? && !@equipment.nil? && @equipment.available?
-      @equipment.available = false
-      @equipment.save
-      @control = Control.new(user_id: @user.id, equipment_id: @equipment.id)
-      
-      if @control.save
-        head :ok
+    respond_to do |format|
+      if !@user.nil? && !@equipment.nil? && @equipment.available?
+        @equipment.available = false
+        @equipment.save
+        @control = Control.new(user_id: @user.id, equipment_id: @equipment.id)
+    
+        if @control.save
+          format.html { redirect_to @control, notice: 'Control was successfully created.' }
+          format.js   { head :ok }
+        else
+          format.html { render :new }
+          format.js   { render :unprocessable_entity }
+        end
       else
-        render :unprocessable_entity
+        puts 'entro'
+        format.html { render :unprocessable_entity }
+        format.js   { render :unprocessable_entity }
       end
-    else
-      render :unprocessable_entity
     end
   end
 

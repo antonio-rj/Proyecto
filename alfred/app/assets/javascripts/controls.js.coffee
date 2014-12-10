@@ -5,8 +5,8 @@
 
 $('document').ready ->
   
-  codes_all = ""
-  $("#number_id").focus()
+  $("#id_number").focus()
+
   $("#id_number").keyup ->
     $("#code_name").focus() if parseInt(@value.length) == parseInt($(this).attr("maxlength"))
 
