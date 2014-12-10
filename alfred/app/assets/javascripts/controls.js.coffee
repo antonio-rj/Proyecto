@@ -4,11 +4,21 @@
 
 
 $('document').ready ->
+  
+  codes_all = ""
+  $("#number_id").focus()
   $("#id_number").keyup ->
     $("#code_name").focus() if parseInt(@value.length) == parseInt($(this).attr("maxlength"))
 
   $("#code_name").keyup ->
     if parseInt(@value.length) == parseInt($(this).attr("maxlength"))
+      #tmp = $("#code_name").val()
+      #codes_all = string.concat(tmp)
+      #$("#code_name").val('')
+      #$("#code_name").focus()
+
+
+
       $("#submit_button").submit()
 
   # newCreate = () ->

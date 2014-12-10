@@ -34,7 +34,7 @@ class ControlsController < ApplicationController
       render 'returns'
     end
   end
-
+ 
   # GET /controls/1
   # GET /controls/1.json
   def show
@@ -64,7 +64,7 @@ class ControlsController < ApplicationController
       @control = Control.new(user_id: @user.id, equipment_id: @equipment.id)
       redirect_to @control if @control.save
     else
-      render :new
+        render :new
     end
   end
 
