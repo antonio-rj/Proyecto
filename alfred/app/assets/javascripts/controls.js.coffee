@@ -12,26 +12,37 @@ $('document').ready ->
 
   $("#code_name").keyup ->
     if parseInt(@value.length) == parseInt($(this).attr("maxlength"))
-      #tmp = $("#code_name").val()
-      #codes_all = string.concat(tmp)
-      #$("#code_name").val('')
-      #$("#code_name").focus()
+      sendData()
+        .done(->
+          setAlert('#alert-message', 'Prestamo exitoso', 'success')
+          $("#code_name").val('')
+        )
+        .fail(->
+          setAlert('#alert-message', 'Prestamo fallido. Intente de nuevo', 'error')
+          $("#code_name").val('')
+        )
 
-
-
-      $("#submit_button").submit()
-
-  # newCreate = () ->
-  #   idNumber = parseInt($('#id_number').val())
-  #   codeName = parseInt($('#code_name').val())
+  sendData = () ->
+    idNumber = parseInt($('#id_number').val())
+    codeName = parseInt($('#code_name').val())
     
-  #   params = {
-  #     id_number: idNumber,
-  #     code_name: codeName,
-  #   }
+    params = {
+      id_number: idNumber,
+      code_name: codeName,
+    }
 
-  #   $.ajax(
-  #     type: "POST",
-  #     url: "/controls",
-  #     data: params
-  #   )
+    $.ajax(
+      type: "POST",
+      url: "/controls",
+      data: params
+    )
+
+  setAlert = (selector, message, type) ->
+    id = Math.floor(Math.random() * 1000)
+    html = "<div class='alert alert-#{type}' id='alert-message-#{id}'>#{message}<a class='close' data-dismiss='alert'>&times;</a></div>"
+    $(selector).append(html)
+
+    window.setTimeout (->
+      $("#alert-message-#{id}").fadeTo(500, 0).slideUp 500, ->
+        $(@).remove()
+    ), 3000

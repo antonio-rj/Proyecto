@@ -62,9 +62,14 @@ class ControlsController < ApplicationController
       @equipment.available = false
       @equipment.save
       @control = Control.new(user_id: @user.id, equipment_id: @equipment.id)
-      redirect_to @control if @control.save
+      
+      if @control.save
+        head :ok
+      else
+        render :unprocessable_entity
+      end
     else
-        render :new
+      render :unprocessable_entity
     end
   end
 
