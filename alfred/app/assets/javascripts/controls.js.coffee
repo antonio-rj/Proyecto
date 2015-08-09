@@ -1,17 +1,15 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
-
 $('document').ready ->
-  
+
   $("#id_number").focus()
 
-  $("#id_number").keyup ->
-    $("#code_name").focus() if parseInt(@value.length) == parseInt($(this).attr("maxlength"))
+  $("#id_number").scannerDetection
+    endChar: [13],
+    onComplete: (string) -> 
+      $("#code_name").focus()
 
-  $("#code_name").keyup ->
-    if parseInt(@value.length) == parseInt($(this).attr("maxlength"))
+  $("#code_name").scannerDetection
+    endChar: [13],
+    onComplete: (string) -> 
       sendData()
         .done(->
           setAlert('#alert-message', 'Prestamo exitoso', 'success')
@@ -23,8 +21,8 @@ $('document').ready ->
         )
 
   sendData = () ->
-    idNumber = parseInt($('#id_number').val())
-    codeName = parseInt($('#code_name').val())
+    idNumber = $('#id_number').val()
+    codeName = $('#code_name').val()
     
     params = {
       id_number: idNumber,

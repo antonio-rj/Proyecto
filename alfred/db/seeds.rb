@@ -7,7 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-#user1 = User.create!(first_name:'chavo', last_name:'delocho', id_number: 888888888, phone: 1234567)
+
+
 user2 = User.create!(first_name:'Miguel', last_name:'Herrera Mayorga', id_number:501166660)
 user3 = User.create!(first_name:'Jesus', last_name:'Esquivel Rodriguez', id_number:588195000 )
 user4 = User.create!(first_name:'Carlos Manuel', last_name:'Vargas Solano', id_number:621715523 )
