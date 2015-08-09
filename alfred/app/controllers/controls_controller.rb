@@ -15,26 +15,37 @@ class ControlsController < ApplicationController
   end
 
   def get_control
-    equipment = Equipment.find_by(
-                  code_name: params['code_name'],
-                  available: false
-                ) # Extrae el equipo de la base de datos
+    # Extrae el equipo de la base de datos
+    equipment =
+      Equipment.where(code_name: params['code_name'], available: false).first
 
-    if equipment # Verifica que haya encontrado el equipo
-      control = Control.find_by(equipment_id: equipment.id, returned_at: nil) # Extrae el prestamo de la base de datos
+    # Verifica que haya encontrado el equipo
+    respond_to do |format|
+      if equipment
+        # Extrae el prestamo de la base de datos
+        control = Control.where(equipment_id: equipment.id, returned_at: nil).first
 
-      if control # Verifica que haya encontrado el prestamo
-        equipment.available = true # Cambia la disponibilidad del equipo
-        control.returned_at = Time.now # Extrae la fecha con que fue devuelto el dispositivo
+        # Verifica que haya encontrado el prestamo
+        if control
 
-        if equipment.save! && control.save!
-          redirect_to action: 'index' # Vuelve a la pagina del historial si se actualizo correctamente la devolucion
-        else
-          render 'returns'
+          # Cambia la disponibilidad del equipo
+          equipment.available = true
+
+          # Extrae la fecha con que fue devuelto el dispositivo
+          control.returned_at = Time.now
+
+            if equipment.save! && control.save!
+              format.js   { head :ok }
+              format.html { redirect_to action: 'returns', notice: 'Se devolvio el equipo exitosamente' }
+            else
+              format.js   { render :unprocessable_entity }
+              format.html { redirect_to action: 'returns', notice: 'No se pudo devolver el equipo.' }
+            end
         end
+      else
+        format.js   { render :unprocessable_entity }
+        format.html { redirect_to action: 'returns', notice: 'Devolucion fallida.' }
       end
-    else
-      render 'returns'
     end
   end
  
@@ -100,9 +111,9 @@ class ControlsController < ApplicationController
   # DELETE /controls/1
   # DELETE /controls/1.json
   def destroy
-    @equipment = Equipment.find(@control.equipment_id) # Extrae el equipo que se encontraba en prestamo.
+    @equipment = Equipment.where(equipment_id: @control.equipment_id).first # Extrae el equipo que se encontraba en prestamo.
     @equipment.available = true # Coloca como disponible el equipo.
-    @equipment.save    
+    @equipment.save
     @control.destroy # Borra la entrada del historial.
     respond_to do |format|
       format.html { redirect_to controls_url, notice: 'Control was successfully destroyed.' }
