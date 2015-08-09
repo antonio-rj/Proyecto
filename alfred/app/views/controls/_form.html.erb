@@ -1,4 +1,4 @@
-<%= form_for(@control) do |f| %>
+<%= form_for @control do |f| %>
   <% if @control.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@control.errors.count, "error") %> prohibited this control from being saved:</h2>
@@ -10,12 +10,17 @@
       </ul>
     </div>
   <% end %>
-
+    <div class="field">
+    <%= label :id_number, 'Cedula' %><br>
+    <%= text_field_tag 'id_number', '', maxlength: 10%>
+  </div>
   <div class="field">
-    <%= f.label :returned_at %><br>
-    <%= f.datetime_select :returned_at %>
+    <%= label :code_name, 'Codigo del equipo' %><br>
+    <%= text_field_tag 'code_name', '', maxlength: 10%>
   </div>
+  <br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Crear/actualizar entrada", id: 'send_button' %>
   </div>
+  <br>
 <% end %>

@@ -1,10 +1,14 @@
+
+
+# Controlador para las oficinas.
+
 class OfficesController < ApplicationController
   before_action :set_office, only: [:show, :edit, :update, :destroy]
 
   # GET /offices
   # GET /offices.json
   def index
-    @offices = Office.all
+    @offices = Office.order(department: :desc, office_number: :asc).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /offices/1

@@ -12,14 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :office_number %><br>
-    <%= f.number_field :office_number %>
-  </div>
-  <div class="field">
-    <%= f.label :department %><br>
+    <%= f.label :department, 'Edificio' %><br>
     <%= f.text_field :department %>
   </div>
+  <div class="field">
+    <%= f.label :office_number, 'Número' %><br>
+    <%= f.number_field :office_number %>
+  </div>
+  
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Crear/actualizar oficina" %>
   </div>
 <% end %>

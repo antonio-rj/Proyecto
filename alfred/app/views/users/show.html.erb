@@ -1,24 +1,31 @@
+<h1>Usuario</h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>First name:</strong>
+  <strong>Nombre:</strong>
   <%= @user.first_name %>
 </p>
 
 <p>
-  <strong>Last name:</strong>
+  <strong>Apellidos:</strong>
   <%= @user.last_name %>
 </p>
 
 <p>
-  <strong>Phone:</strong>
+  <strong>Teléfono:</strong>
   <%= @user.phone %>
 </p>
 
 <p>
-  <strong>Id number:</strong>
+  <strong>Cédula:</strong>
   <%= @user.id_number %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<p>
+  <strong>Oficina:</strong>
+  <%= office_is_present?(@user.office_id) %>
+</p>
+
+<%= link_to 'Editar', edit_user_path(@user) %> |
+<%= link_to 'Volver', users_path %>

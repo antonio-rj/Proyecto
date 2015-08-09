@@ -1,29 +1,31 @@
-<h1>Listing equipment</h1>
+<h1>Lista de equipos</h1>
 
-<table>
+<%= link_to 'Añadir equipo', new_equipment_path %>
+<br>
+<br>
+
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Device name</th>
-      <th>Code name</th>
-      <th>Available</th>
-      <th colspan="3"></th>
+      <th class="text-center">Dispositivo</th>
+      <th class="text-center">Código</th>
+      <th class="text-center">Disponible</th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @equipment.each do |equipment| %>
+    <% @equipment.each do |equip| %>
       <tr>
-        <td><%= equipment.device_name %></td>
-        <td><%= equipment.code_name %></td>
-        <td><%= equipment.available %></td>
-        <td><%= link_to 'Show', equipment %></td>
-        <td><%= link_to 'Edit', edit_equipment_path(equipment) %></td>
-        <td><%= link_to 'Destroy', equipment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td align="center"><%= equip.device_name %></td>
+        <td align="center"><%= equip.code_name %></td>
+        <td align="center"><%= equip_status(equip.available) %></td>
+        <td align="center"><%= link_to 'Editar', edit_equipment_path(equip) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @equipment %>
 
 <br>
 
-<%= link_to 'New Equipment', new_equipment_path %>

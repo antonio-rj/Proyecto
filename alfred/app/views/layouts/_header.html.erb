@@ -1,0 +1,18 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "bodega", root_path, id: "logo" %>
+    <nav>
+      <ul class="nav navbar-nav pull-right">
+        <li><%= link_to "Log in", '#' %></li>
+      </ul>
+
+      <ul class="nav navbar-nav pull-left">
+        <li><%= link_to "Historial", controls_path %></li>
+        <li><%= link_to "Usuarios", users_path %></li>
+        <li><%= link_to "Equipos", equipment_index_path %></li>
+        <li><%= link_to "Oficinas", offices_path %></li>
+        <li><%= link_to "Devoluciones", returns_controls_path %></li>
+      </ul>
+    </nav>
+  </div>
+</header>

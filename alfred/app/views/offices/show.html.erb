@@ -1,14 +1,16 @@
+<h1>Oficina</h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Office number:</strong>
+  <strong>Número de oficina:</strong>
   <%= @office.office_number %>
 </p>
 
 <p>
-  <strong>Department:</strong>
+  <strong>Edificio:</strong>
   <%= @office.department %>
 </p>
 
-<%= link_to 'Edit', edit_office_path(@office) %> |
-<%= link_to 'Back', offices_path %>
+<%= link_to 'Editar', edit_office_path(@office) %> |
+<%= link_to 'Volver', offices_path %>

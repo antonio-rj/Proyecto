@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
+//= require_tree ./vendor/jquery_scanner_detection
 //= require turbolinks
 //= require_tree .

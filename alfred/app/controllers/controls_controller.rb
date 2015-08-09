@@ -1,15 +1,59 @@
+
+# Controlador para el historial.
+
 class ControlsController < ApplicationController
   before_action :set_control, only: [:show, :edit, :update, :destroy]
 
   # GET /controls
   # GET /controls.json
   def index
-    @controls = Control.all
+    @controls_borrowed = Control.borrowed
+    @controls_returned = Control.returned.order(returned_at: :desc).paginate(:page => params[:page],:per_page => 10)
   end
 
+  def returns
+  end
+
+  def get_control
+    # Extrae el equipo de la base de datos
+    equipment =
+      Equipment.where(code_name: params['code_name'], available: false).first
+
+    # Verifica que haya encontrado el equipo
+    respond_to do |format|
+      if equipment
+        # Extrae el prestamo de la base de datos
+        control = Control.where(equipment_id: equipment.id, returned_at: nil).first
+
+        # Verifica que haya encontrado el prestamo
+        if control
+
+          # Cambia la disponibilidad del equipo
+          equipment.available = true
+
+          # Extrae la fecha con que fue devuelto el dispositivo
+          control.returned_at = Time.now
+
+            if equipment.save! && control.save!
+              format.js   { head :ok }
+              format.html { redirect_to action: 'returns', notice: 'Se devolvio el equipo exitosamente' }
+            else
+              format.js   { render :unprocessable_entity }
+              format.html { redirect_to action: 'returns', notice: 'No se pudo devolver el equipo.' }
+            end
+        end
+      else
+        format.js   { render :unprocessable_entity }
+        format.html { redirect_to action: 'returns', notice: 'Devolucion fallida.' }
+      end
+    end
+  end
+ 
   # GET /controls/1
   # GET /controls/1.json
   def show
+    @user = User.find(@control.user_id)
+    @equipment = Equipment.find(@control.equipment_id)
   end
 
   # GET /controls/new
@@ -24,15 +68,28 @@ class ControlsController < ApplicationController
   # POST /controls
   # POST /controls.json
   def create
-    @control = Control.new(control_params)
-
+    @user = User.find_by(id_number: params['id_number']) # Extrae el usuario
+    @equipment = Equipment.find_by(code_name: params['code_name']) # Extrae el equipo
+    @control = Control.new    
     respond_to do |format|
-      if @control.save
-        format.html { redirect_to @control, notice: 'Control was successfully created.' }
-        format.json { render :show, status: :created, location: @control }
+      if !@user.nil? && !@equipment.nil? && @equipment.available? # Revisa si el equipo se encuentra disponible; ademas, de que el usuario y el equipo existan en la base de datos
+        @equipment.available = false # Cambia el estado del equipo a "No disponible".
+        @equipment.save # Actualiza la disponibilidad del equipo
+        @control = Control.new(user_id: @user.id, equipment_id: @equipment.id)
+        puts '******************************** IF 1'  # Debug, se creo la entrada correctamente 
+        if @control.save
+          format.html { redirect_to @control, notice: 'Control was successfully created.' }
+          format.js   { head :ok }
+          puts '******************************** IF 2'  # Debug, se guardo la entrada correctamente
+        else
+          format.html { render :new }
+          format.js   { render :unprocessable_entity }
+          puts '******************************** IF 3'  # Debug, no se guardo la entrada correctamente
+        end
       else
-        format.html { render :new }
-        format.json { render json: @control.errors, status: :unprocessable_entity }
+        puts '********************************** entro'  # Debug, no se pudo crear entrada
+        format.html { render :unprocessable_entity }
+        format.js   { render :unprocessable_entity }
       end
     end
   end
@@ -54,7 +111,10 @@ class ControlsController < ApplicationController
   # DELETE /controls/1
   # DELETE /controls/1.json
   def destroy
-    @control.destroy
+    @equipment = Equipment.where(equipment_id: @control.equipment_id).first # Extrae el equipo que se encontraba en prestamo.
+    @equipment.available = true # Coloca como disponible el equipo.
+    @equipment.save
+    @control.destroy # Borra la entrada del historial.
     respond_to do |format|
       format.html { redirect_to controls_url, notice: 'Control was successfully destroyed.' }
       format.json { head :no_content }
@@ -69,6 +129,6 @@ class ControlsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def control_params
-      params.require(:control).permit(:returned_at)
+      params.fetch(:control, {}).permit(:returned_at, :id_number, :code_name)
     end
 end

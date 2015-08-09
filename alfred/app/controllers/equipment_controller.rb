@@ -1,10 +1,13 @@
+
+# Controlador para los equipos
+
 class EquipmentController < ApplicationController
   before_action :set_equipment, only: [:show, :edit, :update, :destroy]
 
   # GET /equipment
   # GET /equipment.json
   def index
-    @equipment = Equipment.all
+    @equipment = Equipment.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /equipment/1

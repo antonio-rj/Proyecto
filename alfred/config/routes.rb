@@ -1,11 +1,22 @@
 Rails.application.routes.draw do
-  resources :controls
+  get 'login/new'
 
-  resources :offices
+	resources :controls do
+		collection do
+    		get 'returns'
+  			get 'get_control'
+  		end
+  	end
 
-  resources :equipment
+	resources :offices
 
-  resources :users
+	resources :equipment
 
-  get 'static_pages/home'
+	resources :users
+
+
+	root  'static_pages#home'
+	get   'contact'    => 'static_pages#contact'
+	get   '/signup'    => 'login#new'
+
 end

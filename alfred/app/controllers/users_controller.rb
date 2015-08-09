@@ -1,10 +1,15 @@
+
+
+# Controlador para los usuarios.
+
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.order(first_name: :asc).paginate(:page => params[:page], :per_page => 10)
+
   end
 
   # GET /users/1
@@ -24,6 +29,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -69,6 +75,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :phone, :id_number)
+      params.require(:user).permit(:first_name, :last_name, :phone, :id_number, :office_id)
     end
 end
