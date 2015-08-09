@@ -1,3 +1,6 @@
+
+# Controlador para el historial.
+
 class ControlsController < ApplicationController
   before_action :set_control, only: [:show, :edit, :update, :destroy]
 
@@ -15,17 +18,17 @@ class ControlsController < ApplicationController
     equipment = Equipment.find_by(
                   code_name: params['code_name'],
                   available: false
-                )
+                ) # Extrae el equipo de la base de datos
 
-    if equipment
-      control = Control.find_by(equipment_id: equipment.id, returned_at: nil)
+    if equipment # Verifica que haya encontrado el equipo
+      control = Control.find_by(equipment_id: equipment.id, returned_at: nil) # Extrae el prestamo de la base de datos
 
-      if control
-        equipment.available = true
-        control.returned_at = Time.now
+      if control # Verifica que haya encontrado el prestamo
+        equipment.available = true # Cambia la disponibilidad del equipo
+        control.returned_at = Time.now # Extrae la fecha con que fue devuelto el dispositivo
 
         if equipment.save! && control.save!
-          redirect_to action: 'index'
+          redirect_to action: 'index' # Vuelve a la pagina del historial si se actualizo correctamente la devolucion
         else
           render 'returns'
         end
@@ -54,25 +57,26 @@ class ControlsController < ApplicationController
   # POST /controls
   # POST /controls.json
   def create
-    @user = User.find_by(id_number: params['id_number'])
-    @equipment = Equipment.find_by(code_name: params['code_name'])
+    @user = User.find_by(id_number: params['id_number']) # Extrae el usuario
+    @equipment = Equipment.find_by(code_name: params['code_name']) # Extrae el equipo
     @control = Control.new    
-    
     respond_to do |format|
-      if !@user.nil? && !@equipment.nil? && @equipment.available?
-        @equipment.available = false
-        @equipment.save
+      if !@user.nil? && !@equipment.nil? && @equipment.available? # Revisa si el equipo se encuentra disponible; ademas, de que el usuario y el equipo existan en la base de datos
+        @equipment.available = false # Cambia el estado del equipo a "No disponible".
+        @equipment.save # Actualiza la disponibilidad del equipo
         @control = Control.new(user_id: @user.id, equipment_id: @equipment.id)
-    
+        puts '******************************** IF 1'  # Debug, se creo la entrada correctamente 
         if @control.save
           format.html { redirect_to @control, notice: 'Control was successfully created.' }
           format.js   { head :ok }
+          puts '******************************** IF 2'  # Debug, se guardo la entrada correctamente
         else
           format.html { render :new }
           format.js   { render :unprocessable_entity }
+          puts '******************************** IF 3'  # Debug, no se guardo la entrada correctamente
         end
       else
-        puts 'entro'
+        puts '********************************** entro'  # Debug, no se pudo crear entrada
         format.html { render :unprocessable_entity }
         format.js   { render :unprocessable_entity }
       end
@@ -96,10 +100,10 @@ class ControlsController < ApplicationController
   # DELETE /controls/1
   # DELETE /controls/1.json
   def destroy
-    @equipment = Equipment.find(@control.equipment_id)
-    @equipment.available = true
+    @equipment = Equipment.find(@control.equipment_id) # Extrae el equipo que se encontraba en prestamo.
+    @equipment.available = true # Coloca como disponible el equipo.
     @equipment.save    
-    @control.destroy
+    @control.destroy # Borra la entrada del historial.
     respond_to do |format|
       format.html { redirect_to controls_url, notice: 'Control was successfully destroyed.' }
       format.json { head :no_content }

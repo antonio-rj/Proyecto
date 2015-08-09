@@ -1,3 +1,7 @@
+
+
+# Controlador para las oficinas.
+
 class OfficesController < ApplicationController
   before_action :set_office, only: [:show, :edit, :update, :destroy]
 

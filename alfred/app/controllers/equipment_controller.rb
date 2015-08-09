@@ -1,3 +1,6 @@
+
+# Controlador para los equipos
+
 class EquipmentController < ApplicationController
   before_action :set_equipment, only: [:show, :edit, :update, :destroy]
 

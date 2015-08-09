@@ -2,10 +2,10 @@
 
 <%= form_tag get_control_controls_path, :method => 'get' do %>
   <div class="field">
-    <%= label :code_name, 'Codigo del equipo' %>
+    <%= label :code_name_ret, 'Codigo del equipo' %>
     <br>
-    <%= text_field_tag 'code_name', '' %>
+    <%= text_field_tag 'code_name_ret', '' %>
   </div>
   <br>
-  <%= submit_tag "Submit", :class => "button" %>
+  <%= submit_tag "Submit", :class => "send_button_ret" %>
 <% end %>
